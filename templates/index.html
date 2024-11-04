@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/add_expense" method="POST">
+        <input type="text" name="amount" placeholder="Amount" required>
+        <input type="text" name="category" placeholder="Category" required>
+        <input type="date" name="date" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <button type="submit">Add Expense</button>
+    </form>
+    <a href="/view_expenses">View Expenses</a>
+    <a href="{{ url_for('predict_expenses') }}">Predict Future Expenses</a>
+    <a href="{{ url_for('visualize_expenses') }}">Visualize Expenses</a>
+
+
+
+</body>
+</html>
